@@ -12,12 +12,10 @@ int main()
     while(count<=n)
     {
         sum=sum+(1/count);
-         printf("The sum of the harmonic series : 1+1/2+1/3+...+1/n is %5.2f\n", sum);
+        
         count++;
     }
-    double value = 3.14159;
-    printf("The value is .............\n");
-printf("The value is %10.2f\n", value);
+     printf("The sum of the harmonic series : 1+1/2+1/3+...+1/n is %5.2f\n", sum);
 
     
     return 0;
