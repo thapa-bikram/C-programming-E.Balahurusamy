@@ -17,3 +17,6 @@ int main()
     }
     return 0;
 }
+/* if we input 15.75 23 c , data items do not match the variables , no error message is 
+printed . When we attempt to read a real number for an integer variable, the integer 
+part is assigned to the variable, and the truncated part is assigned to the next variable.*/

@@ -1,3 +1,4 @@
+/*formatted output for integer & real numbers.*/
 #include<stdio.h>
 int main()
 {
