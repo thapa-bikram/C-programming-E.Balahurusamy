@@ -29,5 +29,5 @@ so there's no need to get its address using &.
 In C, an array variable without the & operator provides the address of the first element of the array.
 This is because the array variable essentially holds a pointer to the first element. 
 So, when you pass name1 to scanf, it's already a pointer to the memory location where the input string 
-should be stored. Adding the & operator in this context would result in incorrect behavior.
+should be stored. Adding the & operator in this context would result in incorrect behavior.*/
 
