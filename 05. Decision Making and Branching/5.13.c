@@ -3,25 +3,35 @@ Write a program to compute and display the sum of all integers that are divisibl
 but not divisible by 4 and lie between 0 and 100. The program should also count and display
 the number of such values.
 */
-#include<stdio.h>
-int main()
-{
-    int count=0;
-    int sum=0;
-    printf("The list of those numbers:  that are divisible by 6 but not divisible by 4 and lie between 0 and 100.\n");
-    for(int i=0;i<100;i++)
-    {
-        if(i % 6 == 0 && i % 4 !=0 )
-        {
-            printf("%d ",i);
-            sum=sum+i;
-            count++;
-        }
-        
+#include <stdio.h>
+
+int main() {
+
+  int n, i, flag = 0;
+  printf("Enter a positive integer: ");
+  scanf("%d", &n);
+
+  // 0 and 1 are not prime numbers
+  // change flag to 1 for non-prime number
+  if (n == 0 || n == 1)
+    flag = 1;
+
+  for (i = 2; i <= n / 2; ++i) {
+
+    // if n is divisible by i, then n is not prime
+    // change flag to 1 for non-prime number
+    if (n % i == 0) {
+      flag = 1;
+      break;
     }
+  }
 
-    printf("\nThe sum of these numbers = %d\n",sum);
-    printf("There are = %d numbers in total.\n",count);
-    return 0;
+  // flag is 0 for prime numbers
+  if (flag == 0)
+    printf("%d is a prime number.", n);
+  else
+    printf("%d is not a prime number.", n);
 
+  return 0;
 }
+
