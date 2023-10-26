@@ -35,7 +35,7 @@ int main()
     for (int i = 1; i <= rows; i++) {
         // Print leading spaces
         for (int j = 1; j < i; j++) {
-            printf("00"); // Two spaces for each leading space
+            printf("  "); // Two spaces for each leading space
         }
 
         // Print asterisks
