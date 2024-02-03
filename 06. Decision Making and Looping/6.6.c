@@ -12,24 +12,36 @@ P=V
 This is, the value of money at the end of first year becomes the principal amount fot the next 
 year and so on .
 */
-#include <stdio.h>
-#include <math.h>
 
-int main() {
-    double P, r, V;
-    int n;
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+    float rate= 0.10;
+    int numOfYears=1;
+    float value=0;
+    float principal=1000;
+    printf("---------------------------------------------------------------\n");
+    printf(" Principal \t Rate \t\t Number of \t Value at the\n");
+    printf(" \t\t\t\t  years \t end of year\n");
+    printf("---------------------------------------------------------------\n");
+    for(int i=1;i<=10;i+=1)
+    {
+        printf("%7.2f",principal);
+        rate += 0.1;
+        printf("%16.2f",rate);
+        printf("%16d",numOfYears);
+        numOfYears += 1;
+        value=principal*pow((1+rate),numOfYears);
+        printf("%21.2f\n",value);
+        principal= value;
 
-    printf("P      r      n      V\n");
-    printf("-----------------------\n");
 
-    for (P = 1000; P <= 10000; P += 1000) {
-        for (r = 0.10; r <= 0.20; r += 0.01) {
-            for (n = 1; n <= 10; n++) {
-                V = P * pow(1 + r, n);
-                printf("%.2f   %.2f   %d   %.2f\n", P, r, n, V);
-            }
-        }
+
+
+
+        
     }
+    printf("---------------------------------------------------------------\n");
 
-    return 0;
 }
