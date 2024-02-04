@@ -1,10 +1,5 @@
 /*
-10.5 Design a function that accepts data structure designed in Exercise 10.4 to increment the data by one 
-day and return the new date. The following rules are applicable:
-
-If date is the last day in a month, month should be incremented
-If it is the last day in december, the year should be incremented
-There are 29 days in February of a leap year
+10.7
 
 */
 #include<stdio.h>
@@ -24,21 +19,6 @@ int isLeapYear(int year) {
     }
 }
 
-void checker(date* d)
-{
-    d->day=1;
-    if(d->month==12)
-    {
-        d->year++;
-    }
-    d->month++;
-    if(d->month>12)
-    {
-        d->month=d->month%12;
-    }
-    
-}
-
 int validate_date(date* d)
 {
     int flag;
@@ -51,10 +31,6 @@ int validate_date(date* d)
             printf("Re-enter date\n");
             return 1;
         }
-        else if(d->month==2 && d->day==29)
-        {
-            checker(d);
-        }
         else if(d->month ==4 || d->month ==6 || d->month == 9 || d->month == 11)
         {
             if(d->day>30)
@@ -62,50 +38,6 @@ int validate_date(date* d)
                 printf("Maximum number of days for %d month is 30\n",d->month);
                 return 1;
             }
-            else if(d->day==30)
-            {
-                checker(d);
-            }
-
-            
-        }
-        else if(d->month ==1 || d->month ==3 || d->month ==5 || d->month ==7 || d->month ==10 ||d->month ==12)
-        {
-            if(d->day >31)
-            {
-                printf("Maximum number of days for %d month is 31\n",d->month);
-                return 1;
-
-            }
-            else if(d->day==31)
-            {
-                checker(d);
-            }
-            
-        }
-        
-    }
-    else 
-    {
-        if(d->month==2 && d->day>=29)
-        {
-            printf("This is a Leap year and February has only 29 days\n");
-            printf("Re-enter date\n");
-            return 1;
-        }
-        else if(d->month ==4 || d->month ==6 || d->month == 9 || d->month == 11)
-        {
-            if(d->day>30)
-            {
-                printf("Maximum number of days for %d month is 30\n",d->month);
-                return 1;
-            }
-            else if(d->day==30)
-            {
-                d->month++;
-            }
-            
-            
         }
         else if(d->month ==1 || d->month ==2 || d->month ==3 || d->month ==5 || d->month ==7 || d->month ==10 ||d->month ==12)
         {
@@ -115,11 +47,37 @@ int validate_date(date* d)
                 return 1;
 
             }
-            else if(d->day==31)
+        }
+        else if(d->month >12 )
+        {
+            printf("enter valid date\n");
+            return 1;
+        }
+    }
+    else 
+    {
+        if(d->month==2 && d->day>=29)
+        {
+            printf("This is a Leap year and February has only 29 days\n");
+            printf("Re-enter date\n");
+            return 1;
+        }
+        else if(d->month ==4 || d->month ==6 || d->month == 9 || d->month == 8|| d->month == 11)
+        {
+            if(d->day>30)
             {
-                d->month++;
+                printf("Maximum number of days for %d month is 30\n",d->month);
+                return 1;
             }
-            
+        }
+        else if(d->month ==1 || d->month ==2 || d->month ==3 || d->month ==5 || d->month ==7 || d->month ==10 ||d->month ==12)
+        {
+            if(d->day >31)
+            {
+                printf("Maximum number of days for %d month is 31\n",d->month);
+                return 1;
+
+            }
         }
         else if(d->month >12)
         {
@@ -135,6 +93,7 @@ int validate_date(date* d)
 
 void read_date(date* d)
 {
+    int flag;
     label:
     printf("Enter year\n");
     scanf("%d",&d->year);
@@ -143,10 +102,9 @@ void read_date(date* d)
     printf("Enter day\n");
     scanf("%d",&d->day);
     
-    isLeapYear(d->year);
+    flag = isLeapYear(d->year);
     
 }
-
 
 void print_date(date* d)
 {
@@ -216,13 +174,47 @@ void print_date(date* d)
     printf(" %d",d->year);
     printf("\n");
     printf("\n");
-
-
-
 }
+
+void next_date(date* n, int additional_days, int leap_check) {
+    int days_in_month;
+
+    for (int i = 0; i < additional_days; i++) {
+        leap_check = isLeapYear(n->year);
+
+        if (n->month == 2) {
+            if (leap_check) {
+                days_in_month = 29;
+            } else {
+                days_in_month = 28;
+            }
+        } else if (n->month == 4 || n->month == 6 || n->month == 9 || n->month == 11) {
+            days_in_month = 30;
+        } else {
+            days_in_month = 31;
+        }
+
+        if (n->day < days_in_month) {
+            n->day++;
+        } else {
+            n->day = 1;
+
+            if (n->month < 12) {
+                n->month++;
+            } else {
+                n->month = 1;
+                n->year++;
+            }
+        }
+    }
+}
+
+
 int main()
 {
     date request_date;
+    date* point;
+    int add_days;
     int i=0;
     label:
     read_date(&request_date);
@@ -231,6 +223,12 @@ int main()
     {
         goto label;
     }
-    //checker(&request_date);
     print_date(&request_date);
+    printf("Enter the number of days to be added to this date\n");
+    scanf("%d",&add_days);
+    int y;
+    y=isLeapYear(point->year);
+    next_date(&request_date,add_days,y);
+    print_date(&request_date);
+    return 0;
 }

@@ -39,7 +39,7 @@ int validate_date(date* d)
     flag = isLeapYear(d->year);
     if(flag == 1)
     {
-        if(d->month==2 && d->day>=29)
+        if(d->month==2 && d->day>29)
         {
             printf("This is a Leap year and February has only 29 days\n");
             printf("Re-enter date\n");
@@ -62,7 +62,7 @@ int validate_date(date* d)
 
             }
         }
-        else if(d->month >=12 )
+        else if(d->month >12 )
         {
             printf("enter valid date\n");
             return 1;
@@ -93,7 +93,7 @@ int validate_date(date* d)
 
             }
         }
-        else if(d->month >=12)
+        else if(d->month >12)
         {
             printf("Enter month value from 1 to 12\n");
             return 1;
@@ -107,7 +107,6 @@ int validate_date(date* d)
 
 void read_date(date* d)
 {
-    int flag;
     label:
     printf("Enter year\n");
     scanf("%d",&d->year);
@@ -116,7 +115,7 @@ void read_date(date* d)
     printf("Enter day\n");
     scanf("%d",&d->day);
     
-    flag = isLeapYear(d->year);
+    isLeapYear(d->year);
     
 }
 

@@ -1,20 +1,7 @@
 /*
-10.4 Define a structure data type named date containing three integer members day. month and year. Develop
-an interactive modular program to perform the following tasks:
-
-TO read data into structure members by a function
-To validate the data entered by another function
-To print the date in format
-    April 29,2002
-by a third function
-
-The input data should be three integers like 29, 4 and 2002 corresponding to day. month and year. 
-Examples of invalid data:
-
-31,4,2002 - April has only 30 days
-
-29,2,2002 - 2002 is not a leap year
-
+10.6 Modify the input function used in Exercise 10.4 such that it reads a value that represents the date in the 
+form of a long integer, like 19450815 for the date 15-8-1945 (August 15, 1945) and assigns suitable values to 
+the members day, month and year.
 */
 #include<stdio.h>
 #include<string.h>
@@ -33,28 +20,13 @@ int isLeapYear(int year) {
     }
 }
 
-void checker(date* d)
-{
-    d->day=1;
-    if(d->month==12)
-    {
-        d->year++;
-    }
-    d->month++;
-    if(d->month>12)
-    {
-        d->month=d->month%12;
-    }
-    
-}
-
 int validate_date(date* d)
 {
     int flag;
     flag = isLeapYear(d->year);
     if(flag == 1)
     {
-        if(d->month==2 && d->day>=29)
+        if(d->month==2 && d->day>29)
         {
             printf("This is a Leap year and February has only 29 days\n");
             printf("Re-enter date\n");
@@ -67,12 +39,6 @@ int validate_date(date* d)
                 printf("Maximum number of days for %d month is 30\n",d->month);
                 return 1;
             }
-            else if(d->day==30)
-            {
-                checker(d);
-            }
-
-            
         }
         else if(d->month ==1 || d->month ==2 || d->month ==3 || d->month ==5 || d->month ==7 || d->month ==10 ||d->month ==12)
         {
@@ -82,13 +48,12 @@ int validate_date(date* d)
                 return 1;
 
             }
-            else if(d->day==31)
-            {
-                checker(d);
-            }
-            
         }
-        
+        else if(d->month >12 )
+        {
+            printf("enter valid date\n");
+            return 1;
+        }
     }
     else 
     {
@@ -105,12 +70,6 @@ int validate_date(date* d)
                 printf("Maximum number of days for %d month is 30\n",d->month);
                 return 1;
             }
-            else if(d->day==30)
-            {
-                d->month++;
-            }
-            
-            
         }
         else if(d->month ==1 || d->month ==2 || d->month ==3 || d->month ==5 || d->month ==7 || d->month ==10 ||d->month ==12)
         {
@@ -120,11 +79,6 @@ int validate_date(date* d)
                 return 1;
 
             }
-            else if(d->day==31)
-            {
-                d->month++;
-            }
-            
         }
         else if(d->month >12)
         {
@@ -140,19 +94,19 @@ int validate_date(date* d)
 
 void read_date(date* d)
 {
-    int flag;
     label:
-    printf("Enter year\n");
-    scanf("%d",&d->year);
-    printf("Enter month\n");
-    scanf("%d",&d->month);
-    printf("Enter day\n");
-    scanf("%d",&d->day);
-    
-    flag = isLeapYear(d->year);
+    printf("Enter date in this form: year month day \nExample 19450815 \n");
+    long input;
+    int day,month,year;
+    scanf("%ld",&input);
+    d->day=input%100;
+    input=input/100;
+    d->month=input%100;
+    input=input/100;
+    d->year=input;
+    isLeapYear(d->year);
     
 }
-
 
 void print_date(date* d)
 {
@@ -237,6 +191,5 @@ int main()
     {
         goto label;
     }
-    //checker(&request_date);
     print_date(&request_date);
 }
