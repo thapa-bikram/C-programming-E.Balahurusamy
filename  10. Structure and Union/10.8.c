@@ -176,32 +176,45 @@ void print_date(date* d)
     printf("\n");
 }
 
-void next_date(date* n, int additional_days, int leap_check) {
+void next_date(date* n, int additional_days, int leap_check) 
+{
     int days_in_month;
-
-    for (int i = 0; i < additional_days; i++) {
+    for (int i = 0; i < additional_days; i++) 
+    {
         leap_check = isLeapYear(n->year);
 
-        if (n->month == 2) {
+        if (n->month == 2) 
+        {
             if (leap_check) {
                 days_in_month = 29;
-            } else {
+            } 
+            else 
+            {
                 days_in_month = 28;
             }
-        } else if (n->month == 4 || n->month == 6 || n->month == 9 || n->month == 11) {
+        } 
+        else if (n->month == 4 || n->month == 6 || n->month == 9 || n->month == 11) 
+        {
             days_in_month = 30;
-        } else {
+        } 
+        else 
+        {
             days_in_month = 31;
         }
 
         if (n->day < days_in_month) {
             n->day++;
-        } else {
+        } 
+        else 
+        {
             n->day = 1;
 
-            if (n->month < 12) {
+            if (n->month < 12) 
+            {
                 n->month++;
-            } else {
+            } 
+            else 
+            {
                 n->month = 1;
                 n->year++;
             }
